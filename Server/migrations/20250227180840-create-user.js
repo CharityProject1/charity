@@ -1,54 +1,37 @@
-"use strict";
+'use strict';
+/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.sequelize.query(
-      "CREATE TYPE \"enum_Users_status\" AS ENUM('pending', 'approved');"
-    );
-    await queryInterface.createTable("Users", {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable('Users', {
       id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
+        allowNull: false,
         autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
       },
-      firstName: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      lastName: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      username: {
+        type: Sequelize.STRING
       },
       email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
+        type: Sequelize.STRING
       },
       password: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        type: Sequelize.STRING
       },
       role: {
-        type: Sequelize.ENUM("donor", "beneficiary", "admin"),
-        allowNull: false,
-      },
-      status: {
-        type: Sequelize.ENUM("pending", "approved"),
-        allowNull: false,
-      },
-      phoneNumber: {
-        type: Sequelize.STRING,
-      },
-      address: {
-        type: Sequelize.TEXT,
+        type: Sequelize.STRING
       },
       createdAt: {
-        type: Sequelize.DATE,
         allowNull: false,
+        type: Sequelize.DATE
       },
       updatedAt: {
-        type: Sequelize.DATE,
         allowNull: false,
-      },
+        type: Sequelize.DATE
+      }
     });
   },
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('Users');
+  }
 };
