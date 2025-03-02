@@ -6,8 +6,8 @@ const adminRoutes = require("./routes/adminRoutes");
 const userRoutes = require("./routes/userRoutes");
 const contactMessagesRoutes = require("./routes/contactMessagesRoutes");
 const donorRoutes = require("./routes/donorRoutes");
-
-
+const projectRoutes = require("./routes/projectRoutes");
+const addprojectRoutes=require("./routes/addprojectRoutes")
 dotenv.config();
 
 
@@ -18,12 +18,14 @@ app.use(cors());
 app.use(express.json());
 
 
+app.use("/api/projects", projectRoutes);
+
 app.use("/api", adminRoutes);
 app.use("/api", userRoutes);
 app.use("/api", contactMessagesRoutes);
 app.use("/api/donors", donorRoutes);
 
-
+app.use("/api", addprojectRoutes);
 // Start the server
 
 const PORT = process.env.PORT || 4000;

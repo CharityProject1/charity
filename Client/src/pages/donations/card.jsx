@@ -232,40 +232,33 @@ const DonationCard = ({ image, title, description, goal, raised }) => {
     </div>
   );
 };
-
+import axios from "axios";
+import { useEffect } from 'react';
 const DonationSection = () => {
-  const donations = [
-    {
-      image:"Client/src/assets/2025-87.jpg", 
-      title: "مبادرة الغذاء الصحي", 
-      description: "ساهم في تقديم وجبات للمحتاجين حول العالم.", 
-      goal: 15000, 
-      raised: 7500
-    },
-    {
-      image: "Client/src/assets/2025-10.jpg", 
-      title: "دعم التعليم", 
-      description: "ساعد في نشر المعرفة من خلال التبرع .", 
-      goal: 8000, 
-      raised: 4500
-    },
-    {
-      image: "Client/src/assets/2025-11.jpg", 
-      title: "بنك الملابس", 
-      description: "امنح الدفء لمن يحتاج من خلال التبرع .", 
-      goal: 12000, 
-      raised: 6000
-    }
-  ];
+    const [donations, setDonations] = useState([]);
 
-  return (
+    useEffect(() => {
+        axios
+          .get("http://localhost:4000/api/projects") // تعديل الرابط حسب السيرفر
+          .then((response) => {
+            setDonations(response.data);
+          })
+          .catch((error) => console.error("Error fetching projects:", error));
+      }, []);
+
+return (
     <div className="p-6">
       <h2 className="text-2xl font-bold text-center mb-6">المشاريع</h2>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
-      {donations.map((donation, index) => (
-        <DonationCard key={index} {...donation} />
-      ))}
-    </div>    </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
+        {donations.length > 0 ? (
+          donations.map((donation, index) => (
+            <DonationCard key={index} {...donation} />
+          ))
+        ) : (
+          <p className="text-center text-gray-500">لا يوجد مشاريع حالياً</p>
+        )}
+      </div>
+    </div>
   );
 };
 

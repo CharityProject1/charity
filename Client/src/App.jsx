@@ -1,7 +1,7 @@
 
 // import { Router } from 'react-router-dom';
 import AboutUs from './pages/aboutUs/AboutUs'
-import DonationForm from './pages/donations/dd';
+// import DonationForm from './pages/donations/dd';
 import { Router, Routes, Route } from 'react-router-dom';
 import Donate from './pages/donations/Donate';
 import Request from './pages/requests/Request';
@@ -27,12 +27,15 @@ function App() {
         </Routes>
    */}
    {/* <Routedoner/> */}
-   <Navbar/>
-   <DonationSection/>
+   {/* <Navbar/> */}
+   {/* <DonationSection/> */}
    {/* <Requestcard/> */}
-   <Footer/>
-    {/* <Routedd/> */}
+
     {/* <PaymentPage/> */}
+   {/* <Footer/> */}
+   <Routedd></Routedd>
+    {/* <Routedd/> */}
+   
  </>
   )
 }
