@@ -1,11 +1,30 @@
-const express = require('express');
-const {signup} = require("../controllers/authController");
-const router = express.Router();
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { Log } = require('../models');
 
-router.post("/signup", signup);
-
-module.exports = router;
-
+const signup = async (req, res) => {
+    try {
+      const { username, email, password } = req.body;
+  
+  
+      const existingUser = await Log.findOne({ where: { email } });
+      if (existingUser) return res.status(400).json({ error: "البريد الإلكتروني مستخدم بالفعل." });
+  
+      const hashedPassword = await bcrypt.hash(password, 10);
+  
+      const newUser = await Log.create({ username, email, password: hashedPassword });
+  
+  
+      const token = jwt.sign({ userId: newUser.id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+  
+      res.status(201).json({ message: "تم التسجيل بنجاح!", token, user: newUser });
+    } catch (error) {
+      console.error("خطأ في التسجيل:", error);
+      res.status(500).json({ error: "حدث خطأ أثناء تسجيل المستخدم." });
+    }
+  };
+  
+  module.exports = { signup };
 
 
 // // تسجيل الدخول
