@@ -6,6 +6,7 @@ import {
   UserCircleIcon,
   ChatBubbleLeftIcon,
   ArrowRightOnRectangleIcon,
+  PlusCircleIcon
 } from "@heroicons/react/24/solid";
 
 const Sidebar = () => {
@@ -19,6 +20,7 @@ const Sidebar = () => {
     { name: "الصفحة الرئيسية", path: "/home", icon: <HomeIcon className="w-5 h-5" /> },
     { name: "المستخدمون", path: "/users", icon: <UserCircleIcon className="w-5 h-5" /> },
     { name: "الرسائل", path: "/message", icon: <ChatBubbleLeftIcon className="w-5 h-5" /> },
+    { name: "اضافة مشروع", path: "/AddProjectForm", icon: <PlusCircleIcon className="w-5 h-5" /> },
   ];
 
   return (
@@ -47,7 +49,7 @@ const Sidebar = () => {
         </button>
 
         {/* عنوان الموقع */}
-        <h1 className="text-xl font-bold text-center">عنوان الموقع</h1>
+        <h1 className="text-xl font-bold text-center">جود</h1>
 
         {/* الروابط (تم إنزالها إلى الأسفل بـ mt-10) */}
         <ul className="flex-1 mt-10 space-y-3">

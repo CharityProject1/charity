@@ -31,9 +31,12 @@ function App() {
    {/* <DonationSection/> */}
    <Payment/>
    {/* <Requestcard/> */}
-   <Footer/>
-    {/* <Routedd/> */}
+
     {/* <PaymentPage/> */}
+   {/* <Footer/> */}
+   <Routedd></Routedd>
+    {/* <Routedd/> */}
+   
  </>
   )
 }

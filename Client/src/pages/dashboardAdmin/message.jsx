@@ -115,7 +115,7 @@ export function Message() {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {messages.map(
-                    ({ name, email, description, createdAt }, key) => (
+                    ({ id,name, email, description, createdAt }, key) => (
                       <tr
                         key={email}
                         className="hover:bg-gray-50 transition-colors"
@@ -163,6 +163,7 @@ export function Message() {
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <input
+                           key={email}
                             type="text"
                             value={replyMessages[email] || ""}
                             onChange={(e) =>
