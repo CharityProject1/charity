@@ -6,8 +6,14 @@ const adminRoutes = require("./routes/adminRoutes");
 const userRoutes = require("./routes/userRoutes");
 const contactMessagesRoutes = require("./routes/contactMessagesRoutes");
 const donorRoutes = require("./routes/donorRoutes");
+
 const projectRoutes = require("./routes/projectRoutes");
 const addprojectRoutes=require("./routes/addprojectRoutes")
+
+
+const payment = require("./routes/paymentsRoutes")
+
+
 dotenv.config();
 
 
@@ -24,6 +30,7 @@ app.use("/api", adminRoutes);
 app.use("/api", userRoutes);
 app.use("/api", contactMessagesRoutes);
 app.use("/api/donors", donorRoutes);
+app.use("/api",payment)
 
 app.use("/api", addprojectRoutes);
 // Start the server
