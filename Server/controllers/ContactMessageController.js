@@ -49,8 +49,24 @@ const replyToMessage = async (req, res) => {
     return res.status(500).json({ message: "Error sending reply email" });
   }
 };
+const addMessages = async (req, res) => {
+  try {
+    const { name, email, description } = req.body;
 
+    if (!name || !email || !description) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    const newMessage = await ContactMessage.create({ name, email, description });
+
+    return res.status(201).json({ message: "Message added successfully", data: newMessage });
+  } catch (error) {
+    console.error("Error adding message:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
 module.exports = {
   getAllMessages,
   replyToMessage,
+  addMessages
 };

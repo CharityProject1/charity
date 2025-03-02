@@ -1,27 +1,29 @@
-const { Model } = require('sequelize');
-const bcrypt = require('bcryptjs');
-
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      // يمكنك إضافة العلاقات هنا
+      this.hasOne(models.Donor, { foreignKey: "userId" });
+      this.hasOne(models.Beneficiary, { foreignKey: "userId" });
+      this.hasMany(models.SocialLogin, { foreignKey: "userId" });
+      this.hasMany(models.Donation, { foreignKey: "donorId" });
+      this.hasMany(models.Notification, { foreignKey: "userId" });
     }
   }
   User.init(
     {
-      username: DataTypes.STRING,
+      firstName: DataTypes.STRING,
+      lastName: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
-      role: DataTypes.ENUM('متبرع', 'مستفيد'),
+      role: DataTypes.STRING,
+      status: DataTypes.STRING,
+      phoneNumber: DataTypes.STRING,
+      address: DataTypes.TEXT,
     },
     {
       sequelize,
-      modelName: 'User',
-      hooks: {
-        beforeCreate: async (user) => {
-          user.password = await bcrypt.hash(user.password, 10);
-        },
-      },
+      modelName: "User",
     }
   );
   return User;
