@@ -1,7 +1,7 @@
 
 // import { Router } from 'react-router-dom';
 import AboutUs from './pages/aboutUs/AboutUs'
-import DonationForm from './pages/donations/dd';
+// import DonationForm from './pages/donations/dd';
 import { Router, Routes, Route } from 'react-router-dom';
 import Donate from './pages/donations/Donate';
 import Request from './pages/requests/Request';
@@ -12,7 +12,7 @@ import Footer from './components/Footer';
 import Home from './pages/home/Home';
 import Routedoner from './pages/routedashboard/Routedoners';
 import DonationSection from './pages/donations/card';
-import PaymentPage from './pages/donations/payment';
+import Payment from './pages/donations/payment';
 import Requestcard from './pages/donations/requests';
 
 function App() {
@@ -28,7 +28,8 @@ function App() {
    */}
    {/* <Routedoner/> */}
    <Navbar/>
-   <DonationSection/>
+   {/* <DonationSection/> */}
+   <Payment/>
    {/* <Requestcard/> */}
    <Footer/>
     {/* <Routedd/> */}
