@@ -22,23 +22,30 @@ function App() {
 
   return (
     <>
-  {/* 
+  <Navbar/>
   <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/aboutUs" element={<AboutUs />} />
+          <Route path="/aboutUs" element={<AboutUs />}/>
+          <Route path="/payment" element={<PaymentPage />}/>
+          <Route path="/card" element={<DonationSection />}/>
         </Routes>
-   */}
+  
    {/* <Routedoner/> */}
-   {/* <Navbar/> */}
+   
     
    {/* <Requestcard/> */}
 
-    <PaymentPage/>
+    {/* <PaymentPage/> */}
    {/* <Footer/> */}
    {/* <Login/> */}
 {/* <Routedd/> */}
-    <Routedd/>
-    <DonationSection/>
+
+    {/* <Routedd/>
+    <DonationSection/> */}
+
+    {/* <Routedd/> */}
+
     
      {/* <AboutUs /> */}
    {/* </Login> */}
