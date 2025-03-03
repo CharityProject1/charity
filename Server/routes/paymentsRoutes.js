@@ -1,8 +1,7 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const paymentsController = require('../controllers/paymentsController');
+const paymentController = require("../controllers/paymentsController");
 
-// Route to handle payment submission
-router.post('/process-payment', paymentsController.processPayment);
+router.post("/payment", paymentController.processPayment);
 
 module.exports = router;
