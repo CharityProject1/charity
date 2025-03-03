@@ -80,15 +80,15 @@ import { useEffect } from 'react';
 
 const DonationSection = () => {
   const [donations, setDonations] = useState([]);
-  
-  useEffect(() => {
-    axios
-      .get("http://localhost:4000/api/projects") // تعديل الرابط حسب السيرفر
-      .then((response) => {
-        setDonations(response.data);
-      })
-      .catch((error) => console.error("Error fetching projects:", error));
-  }, []);
+ 
+    useEffect(() => {
+        axios
+          .get("http://localhost:4000/api/projects") 
+          .then((response) => {
+            setDonations(response.data);
+          })
+          .catch((error) => console.error("Error fetching projects:", error));
+      }, []);
 
   return (
     <div className="py-12 bg-[#F8F9FC]">
