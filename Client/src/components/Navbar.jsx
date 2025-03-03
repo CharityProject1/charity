@@ -109,7 +109,7 @@ const Navbar = () => {
 
             <div className="text-[#394867] text-right">
               <div className="font-bold">اتصل بنا</div>
-              <div>+970 123 456 789</div>
+              <div>+96277887799</div>
             </div>
           </div>
         </div>
