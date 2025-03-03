@@ -22,14 +22,17 @@ function App() {
 
   return (
     <>
-  {/* 
+  <Navbar/>
   <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/aboutUs" element={<AboutUs />} />
+          <Route path="/aboutUs" element={<AboutUs />}/>
+          <Route path="/payment" element={<PaymentPage />}/>
+          <Route path="/card" element={<DonationSection />}/>
         </Routes>
-   */}
+  
    {/* <Routedoner/> */}
-   {/* <Navbar/> */}
+   
     
    {/* <Requestcard/> */}
 
@@ -37,7 +40,7 @@ function App() {
    {/* <Footer/> */}
    {/* <Login/> */}
 {/* <Routedd/> */}
-    <Routedd/>
+    {/* <Routedd/> */}
     
      {/* <AboutUs /> */}
    {/* </Login> */}
