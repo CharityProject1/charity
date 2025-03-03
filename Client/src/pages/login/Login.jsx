@@ -1,11 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -21,7 +24,8 @@ const Login = () => {
     try {
       const response = await axios.post("http://localhost:4000/api/login", formData);
       setSuccess("تم تسجيل الدخول بنجاح!");
-      setFormData({  email: "", password: ""}); // تفريغ الحقول
+      setFormData({  email: "", password: ""});
+      navigate("/"); 
       console.log("User Data:", response.data);
     } catch (err) {
       setError(err.response?.data?.message || "حدث خطأ ما");
@@ -39,9 +43,10 @@ const Login = () => {
           <input type="password" name="password" placeholder="كلمة المرور" value={formData.password} onChange={handleChange} className="w-full p-2 border rounded-md" required />
           <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">تسجيل الدخول</button>
         </form>
+      <Link to={"/Signup"}>
         <p className="text-center text-gray-600 mt-4">
           لا تملك حسابًا؟ <a href="#" className="text-blue-600 hover:underline">إنشاء حساب</a>
-        </p>
+        </p></Link>
       </div>
     </div>
   );

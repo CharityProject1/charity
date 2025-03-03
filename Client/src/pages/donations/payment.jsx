@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const cardTypes = [
   { name: "MasterCard", color: "bg-blue-700", prefix: /^5[1-5]/, logo: "/api/placeholder/60/40" },
@@ -17,6 +18,14 @@ export default function Payment() {
   const [expiry, setExpiry] = useState("");
   const [cvc, setCvc] = useState("");
   const [cashAmount, setCashAmount] = useState("");
+
+  // Retrieve the amount from local storage when the component mounts
+  useEffect(() => {
+    const storedAmount = localStorage.getItem("donationAmount");
+    if (storedAmount) {
+      setCashAmount(storedAmount);
+    }
+  }, []);
 
   const formatCardNumber = (value) => {
     const v = value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
@@ -55,112 +64,206 @@ export default function Payment() {
     setExpiry(value);
   };
 
-  const handlePayment = () => {
+  const validateCreditCard = () => {
+    // Validate card number (must be 16 digits)
+    if (!cardNumber || cardNumber.replace(/\s/g, "").length !== 16) {
+      Swal.fire("خطأ", "يرجى إدخال رقم بطاقة صالح مكون من 16 رقم", "error");
+      return false;
+    }
+
+    // Validate card holder name (must not be empty)
+    if (!cardHolder || cardHolder.trim() === "") {
+      Swal.fire("خطأ", "يرجى إدخال اسم حامل البطاقة", "error");
+      return false;
+    }
+
+    // Validate expiry date (must be in MM/YY format and not expired)
+    const [month, year] = expiry.split("/");
+    if (!month || !year || month.length !== 2 || year.length !== 2) {
+      Swal.fire("خطأ", "يرجى إدخال تاريخ انتهاء صالح (MM/YY)", "error");
+      return false;
+    }
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear() % 100; // Get last two digits of the year
+    const currentMonth = currentDate.getMonth() + 1; // Months are 0-indexed
+    if (
+      +year < currentYear ||
+      (+year === currentYear && +month < currentMonth)
+    ) {
+      Swal.fire("خطأ", "تاريخ انتهاء البطاقة غير صالح", "error");
+      return false;
+    }
+
+    // Validate CVC (must be 3 digits)
+    if (!cvc || cvc.length !== 3) {
+      Swal.fire("خطأ", "يرجى إدخال رمز CVC صالح مكون من 3 أرقام", "error");
+      return false;
+    }
+
+    return true;
+  };
+  const handlePayment = async () => {
     if (paymentMethod === "cash") {
-      Swal.fire("تم الدفع بنجاح!", `المبلغ المدفوع: ${cashAmount} ريال`, "success");
+      const numericCashAmount = parseInt(cashAmount); // تحويل cashAmount إلى رقم
+  
+      if (isNaN(numericCashAmount) || numericCashAmount <= 0) {
+        Swal.fire("خطأ", "يرجى إدخال مبلغ صالح", "error");
+        return;
+      }
+  
+      Swal.fire("تم الدفع بنجاح!", `المبلغ المدفوع: ${numericCashAmount} دينار`, "success");
     } else {
-      Swal.fire("تم الدفع بنجاح!", "تمت معالجة عملية الدفع ببطاقتك", "success");
+      if (!validateCreditCard()) {
+        return;
+      }
+  
+      const numericCashAmount = parseInt(cashAmount);
+  
+      if (isNaN(numericCashAmount) || numericCashAmount <= 0) {
+        Swal.fire("خطأ", "يرجى إدخال مبلغ صالح", "error");
+        return;
+      }
+  
+      const paymentData = {
+        paymentMethod,
+        cardNumber,
+        cardHolder,
+        expiry,
+        cvc,
+        cashAmount: numericCashAmount, // إرسال المبلغ كرقم
+      };
+  
+      console.log("Payment Data: ", paymentData); // تسجيل البيانات للتأكد
+  
+      try {
+        const response = await axios.post("http://localhost:4000/api/payment", paymentData, {
+          headers: { "Content-Type": "application/json" },
+        });
+  
+        console.log("Response: ", response); // تسجيل استجابة الخادم
+  
+        if (response.data) {
+          Swal.fire("تم الدفع بنجاح!", "تمت معالجة عملية الدفع ببطاقتك", "success");
+        } else {
+          Swal.fire("خطأ", response.data.error);
+        }
+      } catch (error) {
+        console.error("Error processing payment:", error); // تسجيل الخطأ
+        Swal.fire("خطأ", "تعذر الاتصال بالخادم. يرجى المحاولة لاحقًا.", "error");
+      }
     }
   };
+  
+ 
 
   const detectedCard = cardTypes.find((card) => card.prefix.test(cardNumber.replace(/\s/g, ""))) || null;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-blue-50 to-blue-100">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-xl shadow-xl border border-gray-100">
-        <h2 className="text-2xl font-bold text-center text-gray-800 border-b pb-4">اختر طريقة الدفع</h2>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-blue-900 to-indigo-900">
+      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-2xl shadow-2xl border border-blue-200 transform transition-all duration-300 hover:shadow-blue-900/20">
+        <h2 className="text-3xl font-bold text-center text-blue-900 border-b pb-4 border-blue-100">اختر طريقة الدفع</h2>
         
-        <div className="flex justify-around bg-gray-50 p-3 rounded-lg">
-          <label className="flex items-center cursor-pointer">
+        <div className="flex justify-around bg-blue-50 p-4 rounded-xl shadow-inner">
+          <label className="flex items-center cursor-pointer hover:opacity-80 transition">
             <input 
               type="radio" 
               value="cash" 
               checked={paymentMethod === "cash"} 
               onChange={() => setPaymentMethod("cash")}
-              className="w-4 h-4 text-blue-600" 
+              className="w-5 h-5 text-blue-900" 
             />
-            <span className="mr-2 text-gray-700 font-medium">نقدًا</span>
+            <span className="mr-2 text-blue-900 font-medium">نقدًا</span>
           </label>
-          <label className="flex items-center cursor-pointer">
+          <label className="flex items-center cursor-pointer hover:opacity-80 transition">
             <input 
               type="radio" 
               value="credit" 
               checked={paymentMethod === "credit"} 
               onChange={() => setPaymentMethod("credit")}
-              className="w-4 h-4 text-blue-600" 
+              className="w-5 h-5 text-blue-900" 
             />
-            <span className="mr-2 text-gray-700 font-medium">بطاقة ائتمان</span>
+            <span className="mr-2 text-blue-900 font-medium">بطاقة ائتمان</span>
           </label>
         </div>
         
         {paymentMethod === "cash" ? (
-          <div className="bg-gray-50 p-4 rounded-lg">
-            <label className="block text-sm font-medium text-gray-700 mb-2 text-right">أدخل المبلغ النقدي</label>
+          <div className="bg-blue-50 p-5 rounded-xl shadow-md">
+            <label className="block text-md font-semibold text-blue-900 mb-3 text-right">أدخل المبلغ النقدي</label>
             <div className="relative">
               <input 
                 type="number" 
                 value={cashAmount} 
                 onChange={(e) => setCashAmount(e.target.value)} 
-                className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-right" 
+                className="w-full p-4 border-2 border-blue-300 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition text-right bg-white" 
                 placeholder="أدخل المبلغ"
               />
-              <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">دينار</span>
+              <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-900 font-medium">دينار</span>
             </div>
           </div>
         ) : (
           <div className="space-y-4">
             {detectedCard && (
-              <div className="flex justify-end items-center space-x-2">
-                <span className="text-sm text-gray-600">نوع البطاقة:</span>
-                <span className="font-medium text-gray-700">{detectedCard.name}</span>
+              <div className="flex justify-end items-center space-x-3 p-3 rounded-lg bg-blue-50">
+                <span className="text-sm text-blue-900">نوع البطاقة:</span>
+                <span className={`font-medium text-white px-3 py-1 rounded-lg ${detectedCard.color}`}>{detectedCard.name}</span>
                 <img src={detectedCard.logo} alt={detectedCard.name} className="w-10 h-6 object-contain" />
               </div>
             )}
             
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <label className="block text-sm font-medium text-gray-700 mb-2 text-right">رقم البطاقة</label>
+            <div className="bg-blue-50 p-5 rounded-xl shadow-md">
+              <div className="relative mb-4">
+                <input 
+                  type="number" 
+                  value={cashAmount} 
+                  onChange={(e) => setCashAmount(e.target.value)} 
+                  className="w-full p-4 border-2 border-blue-300 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition text-right bg-white" 
+                  placeholder="أدخل المبلغ"
+                />
+                <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-900 font-medium">دينار</span>
+              </div>
+              <label className="block text-md font-semibold text-blue-900 mb-3 text-right">رقم البطاقة</label>
               <input 
                 type="text" 
                 value={cardNumber} 
                 onChange={handleCardNumberChange}
-                className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-right" 
+                className="w-full p-4 border-2 border-blue-300 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition text-right bg-white" 
                 placeholder="1234 5678 9012 3456" 
                 maxLength={19} 
                 dir="ltr"
               />
             </div>
             
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <label className="block text-sm font-medium text-gray-700 mb-2 text-right">اسم حامل البطاقة</label>
+            <div className="bg-blue-50 p-5 rounded-xl shadow-md">
+              <label className="block text-md font-semibold text-blue-900 mb-3 text-right">اسم حامل البطاقة</label>
               <input 
                 type="text" 
                 value={cardHolder} 
                 onChange={(e) => setCardHolder(e.target.value.toUpperCase())} 
-                className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-right" 
+                className="w-full p-4 border-2 border-blue-300 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition text-right bg-white" 
                 placeholder="الاسم الكامل" 
               />
             </div>
             
             <div className="flex space-x-4 rtl:space-x-reverse">
-              <div className="w-1/2 bg-gray-50 p-4 rounded-lg">
-                <label className="block text-sm font-medium text-gray-700 mb-2 text-right">تاريخ الانتهاء</label>
+              <div className="w-1/2 bg-blue-50 p-5 rounded-xl shadow-md">
+                <label className="block text-md font-semibold text-blue-900 mb-3 text-right">تاريخ الانتهاء</label>
                 <input 
                   type="text" 
                   value={expiry} 
                   onChange={handleExpiryChange} 
-                  className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-center" 
+                  className="w-full p-4 border-2 border-blue-300 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition text-center bg-white" 
                   placeholder="MM/YY" 
                   maxLength={5}
                   dir="ltr"
                 />
               </div>
-              <div className="w-1/2 bg-gray-50 p-4 rounded-lg">
-                <label className="block text-sm font-medium text-gray-700 mb-2 text-right">رمز CVC</label>
+              <div className="w-1/2 bg-blue-50 p-5 rounded-xl shadow-md">
+                <label className="block text-md font-semibold text-blue-900 mb-3 text-right">رمز CVC</label>
                 <input 
                   type="text" 
                   value={cvc} 
                   onChange={(e) => setCvc(e.target.value.replace(/[^0-9]/g, ""))} 
-                  className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition text-center" 
+                  className="w-full p-4 border-2 border-blue-300 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900 transition text-center bg-white" 
                   placeholder="123" 
                   maxLength={3}
                   dir="ltr"
@@ -170,15 +273,14 @@ export default function Payment() {
           </div>
         )}
         
-        
         <button 
-          className="w-full py-4 font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-md transition duration-200 focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50"
+          className="w-full py-4 font-bold text-white bg-blue-900 hover:bg-blue-800 rounded-xl shadow-lg transition duration-300 focus:ring-4 focus:ring-blue-800 focus:ring-opacity-50 transform hover:scale-105"
           onClick={handlePayment}
+          style={{ backgroundColor: "#2D336B" }}
         >
-          {paymentMethod === "cash" ? "الدفع نقدًا" : "ادفع الآن"}
+          {paymentMethod === "cash" ? "التبرع نقدًا" : "تبرع الآن"}
         </button>
       </div>
-      
     </div>
   );
 }

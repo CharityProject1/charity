@@ -218,7 +218,8 @@
 
 import { useState } from "react";
 import axios from "axios";
-
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const SignUp = () => {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -230,7 +231,7 @@ const SignUp = () => {
     phoneNumber: "",
     address: "",
   });
-
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
@@ -247,6 +248,7 @@ const SignUp = () => {
       setSuccess("تم التسجيل بنجاح!");
       setFormData({ firstName: "", lastName: "", email: "", password: "", phoneNumber: "", address: "" }); // تفريغ الحقول
       console.log("بيانات المستخدم:", response.data);
+      navigate("/Login"); 
     } catch (err) {
       setError(err.response?.data?.message || "حدث خطأ ما");
     }
@@ -301,6 +303,10 @@ const SignUp = () => {
               تسجيل
             </button>
           </form>
+          <Link to={"/Login"}>
+        <p className="text-center text-gray-600 mt-4">
+          هل  تملك حسابًا؟ <a href="#" className="text-blue-600 hover:underline">تسجيل دخول</a>
+        </p></Link>
         </div>
       </div>
     </div>
