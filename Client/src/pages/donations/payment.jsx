@@ -57,7 +57,7 @@ export default function Payment() {
 
   const handlePayment = () => {
     if (paymentMethod === "cash") {
-      Swal.fire("تم الدفع بنجاح!", `المبلغ المدفوع: ${cashAmount} ريال`, "success");
+      Swal.fire("تم الدفع بنجاح!", `المبلغ المدفوع: ${cashAmount} دينار`, "success");
     } else {
       Swal.fire("تم الدفع بنجاح!", "تمت معالجة عملية الدفع ببطاقتك", "success");
     }

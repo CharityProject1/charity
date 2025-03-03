@@ -33,11 +33,12 @@ function App() {
     
    {/* <Requestcard/> */}
 
-    {/* <PaymentPage/> */}
+    <PaymentPage/>
    {/* <Footer/> */}
    {/* <Login/> */}
 {/* <Routedd/> */}
     <Routedd/>
+    <DonationSection/>
     
      {/* <AboutUs /> */}
    {/* </Login> */}
