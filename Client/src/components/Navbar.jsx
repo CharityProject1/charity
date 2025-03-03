@@ -298,15 +298,23 @@ const Navbar = () => {
               </div>
             ) : (
               <div className="flex items-center space-x-reverse space-x-3">
+
               <Link to={"/Login"}>
+
+              
+
                 <button
                   onClick={() => setIsLoggedIn(true)}
                   className="hidden sm:flex items-center bg-[#394867] hover:bg-gray-600 text-white px-4 py-2 rounded-md transition duration-300"
                 >
                   <span>تسجيل الدخول</span>
                   <LogIn className="h-4 w-4 mr-2" />
+
                 </button></Link>
                 <Link to={"/Signup"}>
+
+                </button>
+
                 <button className="hidden sm:flex items-center text-[#394867] hover:text-gray-600 transition duration-300">
                   <span>إنشاء حساب</span>
                   <User className="h-4 w-4 mr-2" />
@@ -315,6 +323,10 @@ const Navbar = () => {
               </div>
             )}
 
+
+
+
+
             {/* Donate button always visible */}
             <Link to="/PaymentPage">
               <button className="bg-[#394867] text-white hover:bg-gray-600 px-3 sm:px-5 py-2 rounded-md font-bold flex items-center transition duration-300">
@@ -322,6 +334,7 @@ const Navbar = () => {
                 <DollarSign className="h-5 w-5 mr-2" />
               </button>
             </Link>
+
           </div>
         </div>
       </div>
