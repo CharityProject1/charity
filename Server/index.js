@@ -16,7 +16,7 @@ const addprojectRoutes=require("./routes/addprojectRoutes")
 
 const payment = require("./routes/paymentsRoutes")
 
-
+const donationRoutes = require("./routes/donationRoutes");
 
 dotenv.config();
 
@@ -30,7 +30,7 @@ app.use(cookieParser());
 
 
 app.use("/api/projects", projectRoutes);
-
+app.use("/api/donors", donationRoutes);
 app.use("/api", adminRoutes);
 app.use("/api", userRoutes);
 app.use("/api", contactMessagesRoutes);

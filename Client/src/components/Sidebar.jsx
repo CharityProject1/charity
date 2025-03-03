@@ -8,7 +8,7 @@ import {
   ArrowRightOnRectangleIcon,
   PlusCircleIcon
 } from "@heroicons/react/24/solid";
-
+import {  Heart } from "lucide-react";
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -54,7 +54,13 @@ const Sidebar = () => {
         </button>
 
         {/* عنوان الموقع */}
-        <h1 className="text-xl font-bold text-center">جود</h1>
+        <div className="flex items-center justify-center">
+  <Heart className="w-6 h-6 text-white mr-2 animate-pulse" />
+  <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-rose-500 bg-clip-text text-white">
+    جود
+  </div>
+</div>
+
 
         {/* الروابط (تم إنزالها إلى الأسفل بـ mt-10) */}
         <ul className="flex-1 mt-10 space-y-3">

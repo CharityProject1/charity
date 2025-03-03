@@ -305,11 +305,14 @@ export function Home() {
       try {
         const response = await fetch("http://localhost:4000/api/donors/total-donations");
         const data = await response.json();
+        
         setTotalDonations(data.totalDonations);
       } catch (error) {
         console.error("Error fetching total donations:", error);
       }
     };
+    
+
 
     const fetchUserCount = async () => {
       try {
@@ -326,6 +329,35 @@ export function Home() {
     fetchUserCount();
   }, []);
 
+
+
+
+
+  const [dailyDonations, setDailyDonations] = useState({ categories: [], data: [] });
+
+  useEffect(() => {
+    const fetchDailyDonations = async () => {
+      try {
+        const response = await fetch("http://localhost:4000/api/donors/daily-donations");
+        const data = await response.json();
+
+        // تحويل البيانات إلى شكل مناسب للرسم البياني
+        const categories = data.map(entry => entry.date); // التواريخ
+        const values = data.map(entry => entry.totalDonations); // مجموع التبرعات لكل يوم
+
+        setDailyDonations({ categories, data: values });
+      } catch (error) {
+        console.error("Error fetching daily donations:", error);
+      }
+    };
+
+    fetchDailyDonations();
+  }, []);
+
+
+
+
+
   const websiteViewsChart = {
     type: "bar",
     height: 220,
@@ -337,22 +369,34 @@ export function Home() {
     },
   };
 
-  const dailySalesChart = {
+  // const dailySalesChart = {
+  //   type: "line",
+  //   height: 220,
+  //   series: [{ name: "Sales", data: [50, 40, 300, 320, 500, 350, 200, 230, 500] }],
+  //   options: {
+  //     ...chartsConfig,
+  //     colors: ["#0288d1"],
+  //     stroke: { lineCap: "round" },
+  //     markers: { size: 5 },
+  //     xaxis: {
+  //       ...chartsConfig.xaxis,
+  //       categories: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  //     },
+  //   },
+  // };
+  const dailyDonationsChart = {
     type: "line",
     height: 220,
-    series: [{ name: "Sales", data: [50, 40, 300, 320, 500, 350, 200, 230, 500] }],
+    series: [{ name: "التبرعات اليومية", data: dailyDonations.data }],
     options: {
-      ...chartsConfig,
       colors: ["#0288d1"],
       stroke: { lineCap: "round" },
       markers: { size: 5 },
       xaxis: {
-        ...chartsConfig.xaxis,
-        categories: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        categories: dailyDonations.categories,
       },
     },
   };
-
   return (
     <div className="mt-12 rtl p-6">
       <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-2">
@@ -379,10 +423,10 @@ export function Home() {
         />
         <StatisticsChart
           color="white"
-          title="المبيعات اليومية"
-          description="زيادة 15% في مبيعات اليوم"
-          footer="آخر تحديث قبل 1 دقيقة"
-          chart={dailySalesChart}
+          title="التبرعات اليومية"
+            description="إحصائيات التبرعات لكل يوم"
+      footer="آخر تحديث الآن"
+          chart={dailyDonationsChart}
         />
       </div>
     </div>
