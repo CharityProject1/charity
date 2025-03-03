@@ -76,7 +76,7 @@ const DonationSection = () => {
 
     useEffect(() => {
         axios
-          .get("http://localhost:4000/api/projects") // تعديل الرابط حسب السيرفر
+          .get("http://localhost:4000/api/projects") 
           .then((response) => {
             setDonations(response.data);
           })
