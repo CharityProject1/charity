@@ -16,13 +16,18 @@ const Sidebar = () => {
     setIsOpen(!isOpen);
   };
 
+  // const links = [
+  //   { name: "الصفحة الرئيسية", path: "/home", icon: <HomeIcon className="w-5 h-5" /> },
+  //   { name: "المستخدمون", path: "/users", icon: <UserCircleIcon className="w-5 h-5" /> },
+  //   { name: "الرسائل", path: "/message", icon: <ChatBubbleLeftIcon className="w-5 h-5" /> },
+  //   { name: "اضافة مشروع", path: "/AddProjectForm", icon: <PlusCircleIcon className="w-5 h-5" /> },
+  // ];
   const links = [
-    { name: "الصفحة الرئيسية", path: "/home", icon: <HomeIcon className="w-5 h-5" /> },
-    { name: "المستخدمون", path: "/users", icon: <UserCircleIcon className="w-5 h-5" /> },
-    { name: "الرسائل", path: "/message", icon: <ChatBubbleLeftIcon className="w-5 h-5" /> },
-    { name: "اضافة مشروع", path: "/AddProjectForm", icon: <PlusCircleIcon className="w-5 h-5" /> },
+    { name: "الصفحة الرئيسية", path: "/dashboard/overview", icon: <HomeIcon className="w-5 h-5" /> },
+    { name: "المستخدمون", path: "/dashboard/users", icon: <UserCircleIcon className="w-5 h-5" /> },
+    { name: "الرسائل", path: "/dashboard/message", icon: <ChatBubbleLeftIcon className="w-5 h-5" /> },
+    { name: "إضافة مشروع", path: "/dashboard/AddProjectForm", icon: <PlusCircleIcon className="w-5 h-5" /> },
   ];
-
   return (
     <div className="flex flex-row-reverse"> {/* هنا تمت إضافة flex-row-reverse */}
          {!isOpen && (
@@ -71,7 +76,7 @@ const Sidebar = () => {
 
         {/* زر تسجيل الخروج */}
         <NavLink
-          to="/sign-in"
+          to="/"
           className="mt-auto flex flex-row-reverse items-center gap-2 p-3 rounded-md bg-red-600 hover:bg-red-700 transition"
         >
           <ArrowRightOnRectangleIcon className="w-5 h-5" /> <span>تسجيل الخروج</span>

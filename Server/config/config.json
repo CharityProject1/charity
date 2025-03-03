@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "postgres",
-    "password": "password",
+    "password": "1234",
     "database": "chartity",
     "host": "localhost",
     "dialect": "postgres"
