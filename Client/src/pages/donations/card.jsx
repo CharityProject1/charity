@@ -35,17 +35,17 @@ const DonationCard = ({ image, title, description, goal, raised }) => {
         
         {/* معلومات إضافية */}
         <div className="flex justify-between text-sm mb-2">
-          <span className="text-gray-600">الهدف: {goal} دولار</span>
-          <span className="text-[#2D336B] font-medium">تم جمع: {raised} دولار</span>
+          {/* <span className="text-gray-600">الهدف: {goal} دولار</span> */}
+          {/* <span className="text-[#2D336B] font-medium">تم جمع: {raised} دولار</span> */}
         </div>
         
         {/* شريط التقدم */}
-        <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+        {/* <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
           <div 
             className="bg-[#2D336B] h-2.5 rounded-full" 
             style={{ width: `${progress}%` }}
           ></div>
-        </div>
+        </div> */}
         
         {/* إدخال مبلغ التبرع */}
         <input
