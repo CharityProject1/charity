@@ -12,7 +12,7 @@ const DonationCard = ({ image, title, description, goal, raised }) => {
       alert("تم حفظ المبلغ، انتقل إلى صفحة الدفع");
       // يمكنك توجيه المستخدم إلى صفحة الدفع مثلاً:
       // window.location.href = "/payment";
-      navigate("/payment");
+      navigate("/PaymentPage");
     } else {
       alert("يرجى إدخال مبلغ صالح");
     }

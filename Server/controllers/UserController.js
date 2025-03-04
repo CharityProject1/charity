@@ -4,17 +4,15 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-
-
-
-
 const registerUser = async (req, res) => {
   try {
-    const { firstName, lastName, email, password, phoneNumber, address } = req.body;
+    const { firstName, lastName, email, password, phoneNumber, address } =
+      req.body;
 
     // التحقق إذا كان المستخدم موجودًا مسبقًا
     const existingUser = await User.findOne({ where: { email } });
-    if (existingUser) return res.status(400).json({ message: "هذا البريد مسجل مسبقًا" });
+    if (existingUser)
+      return res.status(400).json({ message: "هذا البريد مسجل مسبقًا" });
 
     // تشفير كلمة المرور
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -33,7 +31,9 @@ const registerUser = async (req, res) => {
 
     res.status(201).json({ message: "تم تسجيل المستخدم بنجاح", user: newUser });
   } catch (error) {
-    res.status(500).json({ message: "حدث خطأ أثناء التسجيل", error: error.message });
+    res
+      .status(500)
+      .json({ message: "حدث خطأ أثناء التسجيل", error: error.message });
   }
 };
 
@@ -48,18 +48,23 @@ const loginUser = async (req, res) => {
 
     // التحقق من كلمة المرور
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ message: "كلمة المرور غير صحيحة" });
+    if (!isMatch)
+      return res.status(400).json({ message: "كلمة المرور غير صحيحة" });
 
     // إنشاء التوكن
-    const token = jwt.sign({ id: user.id, role: user.role }, "secretkey", { expiresIn: "1d" });
+    const token = jwt.sign(
+      { id: user.id, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
 
     res.status(200).json({ message: "تم تسجيل الدخول بنجاح", token, user });
   } catch (error) {
-    res.status(500).json({ message: "حدث خطأ أثناء تسجيل الدخول", error: error.message });
+    res
+      .status(500)
+      .json({ message: "حدث خطأ أثناء تسجيل الدخول", error: error.message });
   }
 };
-
-
 
 const getUsersExcludingAdmin = async (req, res) => {
   try {
@@ -152,8 +157,6 @@ const getUserCount = async (req, res) => {
   }
 };
 
-
-
 const getUserRegistrationsByDay = async (req, res) => {
   try {
     const usersByDay = await User.findAll({
@@ -172,14 +175,11 @@ const getUserRegistrationsByDay = async (req, res) => {
   }
 };
 
-
-
 module.exports = {
   registerUser,
   loginUser,
   getUsersExcludingAdmin,
   updateUserStatus,
   getUserCount,
-  getUserRegistrationsByDay
+  getUserRegistrationsByDay,
 };
-

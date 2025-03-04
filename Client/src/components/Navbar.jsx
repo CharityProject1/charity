@@ -225,7 +225,8 @@ const Navbar = () => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("token"); // حذف التوكن
+    localStorage.clear();
+
     setIsLoggedIn(false); // تحديث الحالة
     navigate("/Login"); // إعادة التوجيه إلى صفحة تسجيل الدخول
   };
