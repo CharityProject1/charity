@@ -1,51 +1,33 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+//profilecd 
+import React from "react";
 
 const Profile = () => {
-  const [user, setUser] = useState(null);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const token = localStorage.getItem("authToken");
-        if (!token) {
-          setError("يجب تسجيل الدخول لعرض هذه الصفحة.");
-          return;
-        }
-
-        const response = await axios.get("http://localhost:4000/api/profile", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        setUser(response.data.user);
-      } catch (err) {
-        setError(err.response?.data?.message || "حدث خطأ أثناء جلب البيانات");
-      }
-    };
-
-    fetchUserProfile();
-  }, []);
-
-  if (error) {
-    return <div className="text-red-500 text-center">{error}</div>;
-  }
-
-  if (!user) {
-    return <div className="text-center">جارٍ تحميل البيانات...</div>;
-  }
+  const user = {
+    firstName: "محمود",
+    lastName: "سليمان",
+    email: "mahmoud@gmail.com",
+    phoneNumber: "+962 7 9999 9999",
+    address: "الأردن",
+    role: "مستخدم عادي",
+    status: "نشط",
+  };
 
   return (
-    <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md mt-10">
-      <h2 className="text-2xl font-bold mb-4 text-center">ملف المستخدم</h2>
-      <p><strong>الاسم:</strong> {user.firstName} {user.lastName}</p>
-      <p><strong>البريد الإلكتروني:</strong> {user.email}</p>
-      <p><strong>رقم الهاتف:</strong> {user.phoneNumber}</p>
-      <p><strong>العنوان:</strong> {user.address}</p>
-      <p><strong>الدور:</strong> {user.role}</p>
-      <p><strong>الحالة:</strong> {user.status}</p>
+    <div className="max-w-md mx-auto bg-white p-6 rounded-xl shadow-lg mt-10 border border-gray-200">
+      <div className="flex flex-col items-center">
+        <div className="w-24 h-24 bg-blue-500 text-white text-3xl flex items-center justify-center rounded-full shadow-md">
+          {user.firstName.charAt(0)}{user.lastName.charAt(0)}
+        </div>
+        <h2 className="text-2xl font-bold mt-4 text-gray-800">{user.firstName} {user.lastName}</h2>
+        <p className="text-gray-600">{user.role}</p>
+      </div>
+      
+      <div className="mt-6 space-y-4 text-gray-700">
+        <p><strong className="text-gray-900">البريد الإلكتروني:</strong> {user.email}</p>
+        <p><strong className="text-gray-900">رقم الهاتف:</strong> {user.phoneNumber}</p>
+        <p><strong className="text-gray-900">العنوان:</strong> {user.address}</p>
+        <p><strong className="text-gray-900">الحالة:</strong> <span className="text-green-600 font-semibold">{user.status}</span></p>
+      </div>
     </div>
   );
 };
