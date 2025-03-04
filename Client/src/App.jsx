@@ -107,6 +107,8 @@ import DonationSection from './pages/donations/card';
 import PaymentPage from "./pages/donations/payment";
 import Requestcard from "./pages/donations/requests";
 import Routedd from "./pages/routedashboard/Routedd";
+import BeneficiaryForm from "./pages/BeneficiaryForm";
+import BeneficiaryCard from "./pages/BeneficiaryCard";
 
 function App() {
   return (
@@ -160,6 +162,18 @@ function App() {
           <DonationSection />
           <Footer />
         </>} />
+
+        <Route path="/BeneficiaryForm" element={<>
+          <Navbar />
+          <BeneficiaryForm />
+          <Footer />
+        </>} />
+        <Route path="/BeneficiaryCard" element={<>
+          <Navbar />
+          <BeneficiaryCard />
+          <Footer />
+        </>} />
+
 
         <Route path="/PaymentPage" element={<>
           <Navbar />
