@@ -210,7 +210,7 @@ const Donate = () => {
                     شيء.
                   </p>
                   <div className="flex justify-between items-center">
-                    <span className="text-[#2D336B] font-bold">20 ريال</span>
+                    <span className="text-[#2D336B] font-bold">20 دينار</span>
                     <button className="bg-[#A9B5DF] hover:bg-[#2D336B] text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300 text-sm">
                       تبرع الآن
                     </button>
@@ -244,7 +244,7 @@ const Donate = () => {
                     أنا وكافل اليتيم في الجنة كهاتين. وأشار بالسبابة والوسطى.
                   </p>
                   <div className="flex justify-between items-center">
-                    <span className="text-[#2D336B] font-bold">300 ريال</span>
+                    <span className="text-[#2D336B] font-bold">300 دينار</span>
                     <button className="bg-[#A9B5DF] hover:bg-[#2D336B] text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300 text-sm">
                       تبرع الآن
                     </button>
@@ -278,7 +278,7 @@ const Donate = () => {
                     ما آمن بي من بات شبعان وجاره جائع إلى جنبه وهو يعلم به.
                   </p>
                   <div className="flex justify-between items-center">
-                    <span className="text-[#2D336B] font-bold">15 ريال</span>
+                    <span className="text-[#2D336B] font-bold">15 دينار</span>
                     <button className="bg-[#A9B5DF] hover:bg-[#2D336B] text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300 text-sm">
                       تبرع الآن
                     </button>
@@ -305,7 +305,7 @@ const Donate = () => {
                           : "border-2 border-[#A9B5DF] text-[#2D336B] hover:bg-[#F0F3FA]"
                       }`}
                     >
-                      {amount} ريال
+                      {amount} دينار
                     </button>
                   ))}
                 </div>
@@ -319,7 +319,7 @@ const Donate = () => {
                     className="w-full py-3 px-4 rounded-lg border-2 border-[#A9B5DF] focus:border-[#2D336B] focus:outline-none text-right"
                   />
                   <span className="absolute left-4 top-3 text-gray-500">
-                    ريال
+                    دينار
                   </span>
                 </div>
 
@@ -504,8 +504,8 @@ const Donate = () => {
                       <div className="bg-[#2D336B] h-3 rounded-full w-3/4"></div>
                     </div>
                     <div className="flex justify-between text-sm text-gray-500">
-                      <span>الهدف: 100,000 ريال</span>
-                      <span>تم جمع: 75,000 ريال</span>
+                      <span>الهدف: 100,000 دينار</span>
+                      <span>تم جمع: 75,000 دينار</span>
                     </div>
                   </div>
                   <button className="bg-[#A9B5DF] hover:bg-[#2D336B] text-white font-bold py-3 px-8 rounded-full transition-colors duration-300 shadow-md hover:shadow-lg w-full">
