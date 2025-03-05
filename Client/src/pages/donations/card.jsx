@@ -1,7 +1,9 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-const DonationCard = ({ image, title, description, goal, raised }) => {
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+const DonationCard = ({ image, title, description, goal, raised,id }) => {
+
   const progress = (raised / goal) * 100;
   const [amount, setAmount] = useState("");
   const navigate = useNavigate();
@@ -68,12 +70,11 @@ const DonationCard = ({ image, title, description, goal, raised }) => {
 
         {/* خط فاصل وكلمة تفاصيل */}
         <div className="mt-4 pt-3 border-t border-gray-200 text-center">
-          <a
-            href="#"
-            className="text-[#2D336B] hover:text-[#A9B5DF] text-sm font-medium transition-colors duration-300"
-          >
+
+        <Link to={`/project/${id}`} className="text-[#2D336B] hover:text-[#A9B5DF] text-sm font-medium transition-colors duration-300">
+
             تفاصيل
-          </a>
+          </Link>
         </div>
       </div>
     </div>
@@ -112,6 +113,7 @@ const DonationSection = () => {
                 description={donation.description}
                 goal={donation.goal}
                 raised={donation.raised}
+                id={donation.id}
               />
             ))
           ) : (
