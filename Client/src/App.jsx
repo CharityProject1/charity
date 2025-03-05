@@ -128,7 +128,12 @@ function App() {
           <AboutUs />
           <Footer />
         </>} />
-        
+  
+        <Route path="/PaymentPage" element={<>
+          <Navbar />
+          <PaymentPage />
+          <Footer />
+        </>} />
         <Route path="/Donate" element={<>
           <Navbar />
           <Donate />
