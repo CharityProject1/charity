@@ -110,7 +110,10 @@ import Routedd from "./pages/routedashboard/Routedd";
 import BeneficiaryForm from "./pages/BeneficiaryForm";
 import BeneficiaryCard from "./pages/BeneficiaryCard";
 import Profile from "./pages/profile";
+
 import ProjectDetailsPage from "./pages/donations/Projectdetails";
+
+
 
 function App() {
   return (
@@ -189,6 +192,14 @@ function App() {
         <Route path="/project/:id" element={<>
           <Navbar />
           <ProjectDetailsPage />
+          <Footer />
+        </>} />
+
+
+      
+        <Route path="/Profile" element={<>
+          <Navbar />
+          <Profile />
           <Footer />
         </>} />
 

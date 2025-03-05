@@ -534,7 +534,14 @@ import {
   BookOpen,
 } from "lucide-react";
 import { Link as RouterLink } from "react-router-dom";
+import axios from "axios";
+
 // Mock data for slides/campaigns
+
+
+
+
+
 const slides = [
   {
     id: 1,
@@ -627,7 +634,7 @@ const Home = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   const [activeAccordion, setActiveAccordion] = useState(null);
   // const [isVisible, setIsVisible] = useState(false);
-
+ const [donations, setDonations] = useState([]);
   // Animation on scroll
   useEffect(() => {
     const handleScroll = () => {
@@ -639,7 +646,14 @@ const Home = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
+ useEffect(() => {
+   axios
+     .get("http://localhost:4000/api/projects")
+     .then((response) => {
+       setDonations(response.data.slice(0,3));
+     })
+     .catch((error) => console.error("Error fetching projects:", error));
+ }, []);
   // Toggle FAQ accordion
   const toggleAccordion = (id) => {
     setActiveAccordion(activeAccordion === id ? null : id);
@@ -662,6 +676,7 @@ const Home = () => {
 
     return () => clearInterval(interval);
   }, [activeSlide]);
+
 
   return (
     <div className="font-sans overflow-x-hidden" dir="rtl">
@@ -733,7 +748,7 @@ const Home = () => {
       </section>
 
       {/* Current Campaigns Section with Cards */}
-      <section className="py-24 bg-gradient-to-b from-[#A9B5DF]/10 to-white">
+      {/* <section className="py-24 bg-gradient-to-b from-[#A9B5DF]/10 to-white">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-16 text-[#2D336B] relative">
             <span className="inline-block relative">
@@ -779,8 +794,62 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
+      <div className="py-12 bg-[#F8F9FC]">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-[#2D336B] text-center mb-10 relative after:content-[''] after:absolute after:bottom-[-12px] after:left-1/2 after:transform after:translate-x-[-50%] after:w-20 after:h-1 after:bg-[#A9B5DF] after:rounded-full">
+            المشاريع
+          </h2>
 
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {donations.length > 0 ? (
+              donations.map((donation, index) => (
+                <div
+                  key={index}
+                  className="bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl"
+                >
+                  <div className="relative">
+                    <img
+                      src={donation.image}
+                      alt={donation.title}
+                      className="w-full h-56 object-cover"
+                    />
+                    <div className="absolute top-4 right-4 bg-[#2D336B] text-white px-3 py-1 rounded-full text-sm">
+                      مشروع جديد
+                    </div>
+                  </div>
+
+                  <div className="p-6 space-y-4">
+                    <h3 className="text-xl font-bold text-[#2D336B]">
+                      {donation.title}
+                    </h3>
+
+                    <p className="text-gray-600 line-clamp-2">
+                      {donation.description}
+                    </p>
+
+                    <div className="flex justify-between text-sm text-gray-600">
+                      <span>
+                        تم جمع: {donation.raised.toLocaleString()} ر.س
+                      </span>
+                      <span>الهدف: {donation.goal.toLocaleString()} ر.س</span>
+                    </div>
+                    <RouterLink to="/PaymentPage">
+                      <button className="w-full bg-[#2D336B] text-white py-3 rounded-lg hover:bg-opacity-90 transition-colors">
+                        تبرع الآن
+                      </button>
+                    </RouterLink>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="col-span-full text-center text-gray-500 py-12 bg-white rounded-lg shadow-md">
+                لا يوجد مشاريع حالياً
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
       {/* About Section with Video */}
       <section className="py-24 bg-gradient-to-br from-[#A9B5DF]/20 via-white to-[#A9B5DF]/10">
         <div className="container mx-auto px-4">

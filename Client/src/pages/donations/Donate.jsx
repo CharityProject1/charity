@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import {Link} from "react-router-dom"
 const Donate = () => {
   const [activeTab, setActiveTab] = useState("donations");
   const [donationAmount, setDonationAmount] = useState("");
@@ -86,9 +86,11 @@ const Donate = () => {
                   <p className="text-gray-600 mb-8 h-14">
                     ساهم في توفير وجبات طعام للأسر المحتاجة وإطعام المساكين.
                   </p>
-                  <button className="bg-[#A9B5DF] hover:bg-[#2D336B] text-white font-bold py-3 px-8 rounded-full transition-colors duration-300 shadow-md hover:shadow-lg w-full">
-                    تبرع الآن
-                  </button>
+                  <Link to="/PaymentPage">
+                    <button className="bg-[#A9B5DF] hover:bg-[#2D336B] text-white font-bold py-3 px-8 rounded-full transition-colors duration-300 shadow-md hover:shadow-lg w-full">
+                      تبرع الآن
+                    </button>
+                  </Link>
                 </div>
               </div>
 
@@ -120,9 +122,11 @@ const Donate = () => {
                     تبرع بملابس جديدة أو مستعملة بحالة جيدة لمن هم في حاجة
                     إليها.
                   </p>
-                  <button className="bg-[#A9B5DF] hover:bg-[#2D336B] text-white font-bold py-3 px-8 rounded-full transition-colors duration-300 shadow-md hover:shadow-lg w-full">
-                    تبرع الآن
-                  </button>
+                  <Link to="/PaymentPage">
+                    <button className="bg-[#A9B5DF] hover:bg-[#2D336B] text-white font-bold py-3 px-8 rounded-full transition-colors duration-300 shadow-md hover:shadow-lg w-full">
+                      تبرع الآن
+                    </button>
+                  </Link>
                 </div>
               </div>
 
@@ -153,9 +157,11 @@ const Donate = () => {
                   <p className="text-gray-600 mb-8 h-14">
                     ساهم في توفير الكتب للطلاب المحتاجين ودعم العلم والتعليم.
                   </p>
-                  <button className="bg-[#A9B5DF] hover:bg-[#2D336B] text-white font-bold py-3 px-8 rounded-full transition-colors duration-300 shadow-md hover:shadow-lg w-full">
-                    تبرع الآن
-                  </button>
+                  <Link to="/PaymentPage">
+                    <button className="bg-[#A9B5DF] hover:bg-[#2D336B] text-white font-bold py-3 px-8 rounded-full transition-colors duration-300 shadow-md hover:shadow-lg w-full">
+                      تبرع الآن
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -387,132 +393,7 @@ const Donate = () => {
 
             {/* Main Charity Projects */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Zakat Card - Improved */}
-              <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group transform hover:-translate-y-2">
-                <div className="h-40 bg-gradient-to-r from-[#2D336B] to-[#3D4380] flex items-center justify-center overflow-hidden">
-                  <div className="relative w-24 h-24 group-hover:scale-110 transition-transform duration-300">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-24 w-24 text-white opacity-90"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <div className="p-8 text-center border-t-4 border-[#A9B5DF]">
-                  <h2 className="text-2xl font-bold mb-4 text-[#2D336B]">
-                    الزكاة
-                  </h2>
-                  <p className="text-gray-600 mb-6">
-                    أخرج زكاة مالك لتطهير أموالك وسد حاجة الفقراء والمساكين.
-                  </p>
-                  <div className="flex justify-center gap-4 mb-6">
-                    <button className="border-2 border-[#A9B5DF] text-[#2D336B] font-bold py-2 px-4 rounded-lg hover:bg-[#F0F3FA] transition-colors duration-300">
-                      حاسبة الزكاة
-                    </button>
-                  </div>
-                  <button className="bg-[#A9B5DF] hover:bg-[#2D336B] text-white font-bold py-3 px-8 rounded-full transition-colors duration-300 shadow-md hover:shadow-lg w-full">
-                    أخرج زكاتك
-                  </button>
-                </div>
-              </div>
-
-              {/* Sadaqah Jariyah Card - Improved */}
-              <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group transform hover:-translate-y-2">
-                <div className="h-40 bg-gradient-to-r from-[#2D336B] to-[#3D4380] flex items-center justify-center overflow-hidden">
-                  <div className="relative w-24 h-24 group-hover:scale-110 transition-transform duration-300">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-24 w-24 text-white opacity-90"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <div className="p-8 text-center border-t-4 border-[#A9B5DF]">
-                  <h2 className="text-2xl font-bold mb-4 text-[#2D336B]">
-                    صدقة جارية
-                  </h2>
-                  <p className="text-gray-600 mb-6">
-                    ساهم في بناء المساجد وحفر الآبار ومشاريع الصدقات الجارية.
-                  </p>
-                  <div className="mb-6">
-                    <div className="flex justify-center gap-2 mb-2">
-                      {[100, 500, 1000].map((amount) => (
-                        <span
-                          key={amount}
-                          onClick={() => handleAmountSelect(amount)}
-                          className="cursor-pointer bg-[#F0F3FA] text-[#2D336B] text-sm py-1 px-3 rounded-full hover:bg-[#A9B5DF] hover:text-white transition-colors duration-300"
-                        >
-                          {amount}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <button className="bg-[#A9B5DF] hover:bg-[#2D336B] text-white font-bold py-3 px-8 rounded-full transition-colors duration-300 shadow-md hover:shadow-lg w-full">
-                    تبرع الآن
-                  </button>
-                </div>
-              </div>
-
-              {/* Charity Fund Card - Improved */}
-              <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group transform hover:-translate-y-2">
-                <div className="h-40 bg-gradient-to-r from-[#2D336B] to-[#3D4380] flex items-center justify-center overflow-hidden">
-                  <div className="relative w-24 h-24 group-hover:scale-110 transition-transform duration-300">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-24 w-24 text-white opacity-90"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <div className="p-8 text-center border-t-4 border-[#A9B5DF]">
-                  <h2 className="text-2xl font-bold mb-4 text-[#2D336B]">
-                    صندوق الخيرات
-                  </h2>
-                  <p className="text-gray-600 mb-6">
-                    صندوق عام للتبرعات يتم توجيهها للأكثر احتياجاً حسب
-                    الأولويات.
-                  </p>
-                  <div className="mb-6">
-                    <div className="w-full bg-[#F0F3FA] h-3 rounded-full mb-2">
-                      <div className="bg-[#2D336B] h-3 rounded-full w-3/4"></div>
-                    </div>
-                    <div className="flex justify-between text-sm text-gray-500">
-                      <span>الهدف: 100,000 دينار</span>
-                      <span>تم جمع: 75,000 دينار</span>
-                    </div>
-                  </div>
-                  <button className="bg-[#A9B5DF] hover:bg-[#2D336B] text-white font-bold py-3 px-8 rounded-full transition-colors duration-300 shadow-md hover:shadow-lg w-full">
-                    تبرع الآن
-                  </button>
-                </div>
-              </div>
+          
             </div>
           </div>
         )}

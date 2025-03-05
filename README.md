@@ -38,6 +38,6 @@ Mahmoud Suliman - Developer
 
 Mohammed Ajlouni - Developer
 
- تواصل معنا
 
-إذا كان لديك أي استفسار أو اقتراح، لا تتردد في التواصل معنا عبر البريد الإلكتروني: support@charityplatform.com.
+[figma](https://www.figma.com/design/GAGTG0qL44TFpvpU6DGJnd/Untitled?node-id=0-1&p=f&t=lvjDSrFt6oxjcXMa-0)
+[trello](https://trello.com/b/Ue8U1OZZ/charitable-project)

@@ -107,17 +107,17 @@ export default function BeneficiaryForm() {
   };
 
   return (
-    <div className="max-w-lg mx-auto bg-white p-6 shadow-lg rounded-lg">
-      <h2 className="text-xl font-bold mb-4 text-center">نموذج المستفيد</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="max-w-lg mx-auto bg-[#A9B5DF]/10 p-8 shadow-lg rounded-lg border border-[#A9B5DF]/30">
+      <h2 className="text-2xl font-bold mb-6 text-center text-[#2D336B]">نموذج المستفيد</h2>
+      <form onSubmit={handleSubmit} className="space-y-5">
         {/* Status */}
         <div>
-          <label className="block font-medium">الحالة</label>
+          <label className="block font-medium text-[#2D336B] mb-1">الحالة</label>
           <select
             name="statusPerson"
             value={formData.statusPerson}
             onChange={handleChange}
-            className="w-full p-2 border rounded"
+            className="w-full p-3 border border-[#A9B5DF] rounded-md focus:ring-2 focus:ring-[#2D336B] focus:border-transparent transition-all duration-200"
           >
             <option value="">اختر الحالة</option>
             <option value="needy">محتاج</option>
@@ -125,85 +125,85 @@ export default function BeneficiaryForm() {
             <option value="disabled">ذو احتياجات خاصة</option>
           </select>
           {errors.statusPerson && (
-            <p className="text-red-500 text-sm">{errors.statusPerson}</p>
+            <p className="text-red-500 text-sm mt-1">{errors.statusPerson}</p>
           )}
         </div>
 
         {/* Address */}
         <div>
-          <label className="block font-medium">العنوان</label>
+          <label className="block font-medium text-[#2D336B] mb-1">العنوان</label>
           <input
             name="address"
             value={formData.address}
             onChange={handleChange}
-            className="w-full p-2 border rounded"
+            className="w-full p-3 border border-[#A9B5DF] rounded-md focus:ring-2 focus:ring-[#2D336B] focus:border-transparent transition-all duration-200"
           />
           {errors.address && (
-            <p className="text-red-500 text-sm">{errors.address}</p>
+            <p className="text-red-500 text-sm mt-1">{errors.address}</p>
           )}
         </div>
 
         {/* Description */}
         <div>
-          <label className="block font-medium">وصف</label>
+          <label className="block font-medium text-[#2D336B] mb-1">وصف</label>
           <input
             name="description"
             value={formData.description}
             onChange={handleChange}
-            className="w-full p-2 border rounded"
+            className="w-full p-3 border border-[#A9B5DF] rounded-md focus:ring-2 focus:ring-[#2D336B] focus:border-transparent transition-all duration-200"
           />
           {errors.description && (
-            <p className="text-red-500 text-sm">{errors.description}</p>
+            <p className="text-red-500 text-sm mt-1">{errors.description}</p>
           )}
         </div>
 
         {/* Type */}
         <div>
-          <label className="block font-medium">نوع المستفيد</label>
+          <label className="block font-medium text-[#2D336B] mb-1">نوع المستفيد</label>
           <select
             name="type"
             value={formData.type}
             onChange={handleChange}
-            className="w-full p-2 border rounded"
+            className="w-full p-3 border border-[#A9B5DF] rounded-md focus:ring-2 focus:ring-[#2D336B] focus:border-transparent transition-all duration-200"
           >
             <option value="">اختر النوع</option>
             <option value="individual">فرد</option>
             <option value="family">عائلة</option>
           </select>
-          {errors.type && <p className="text-red-500 text-sm">{errors.type}</p>}
+          {errors.type && <p className="text-red-500 text-sm mt-1">{errors.type}</p>}
         </div>
 
         {/* Needs */}
         <div>
-          <label className="block font-medium">الاحتياجات</label>
-          <div className="flex gap-4">
-            <label className="flex items-center">
+          <label className="block font-medium text-[#2D336B] mb-2">الاحتياجات</label>
+          <div className="flex gap-6 bg-white p-4 rounded-md border border-[#A9B5DF]/30">
+            <label className="flex items-center text-[#2D336B]">
               <input
                 type="checkbox"
                 name="food"
                 checked={formData.needs.food}
                 onChange={handleChange}
-                className="mr-2"
+                className="mr-2 w-4 h-4 accent-[#2D336B]"
               />{" "}
               طعام
             </label>
-            <label className="flex items-center">
+            <label className="flex items-center text-[#2D336B]">
               <input
                 type="checkbox"
                 name="books"
                 checked={formData.needs.books}
                 onChange={handleChange}
-                className="mr-2"
+                className="mr-2 w-4 h-4 accent-[#2D336B]"
               />{" "}
               كتب
             </label>
-            <label className="flex items-center">
+            <label className="flex items-center text-[#2D336B]">
               <input
                 type="checkbox"
                 name="clothes"
                 checked={formData.needs.clothes}
                 onChange={handleChange}
-                className="mr-2"
+                className="mr-2 w-4 h-4 accent-[#2D336B]"
               />{" "}
               ملابس
             </label>
@@ -212,26 +212,36 @@ export default function BeneficiaryForm() {
 
         {/* Document Upload */}
         <div>
-          <label className="block font-medium">تحميل المستندات (PDF فقط)</label>
-          <input
-            type="file"
-            name="document"
-            onChange={handleChange}
-            className="w-full p-2 border rounded"
-          />
+          <label className="block font-medium text-[#2D336B] mb-1">تحميل المستندات (PDF فقط)</label>
+          <div className="border border-dashed border-[#A9B5DF] p-4 rounded-md bg-white">
+            <input
+              type="file"
+              name="document"
+              onChange={handleChange}
+              className="w-full text-[#2D336B]"
+            />
+          </div>
           {errors.document && (
-            <p className="text-red-500 text-sm">{errors.document}</p>
+            <p className="text-red-500 text-sm mt-1">{errors.document}</p>
           )}
         </div>
 
         {/* Success/Error Messages */}
-        {successMessage && <p className="text-green-500">{successMessage}</p>}
-        {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+        {successMessage && (
+          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
+            {successMessage}
+          </div>
+        )}
+        {errorMessage && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+            {errorMessage}
+          </div>
+        )}
 
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+          className="w-full bg-[#2D336B] text-white py-3 rounded-md hover:bg-[#2D336B]/90 transition-all duration-300 font-medium text-lg mt-4 focus:ring-2 focus:ring-offset-2 focus:ring-[#A9B5DF]"
           disabled={loading}
         >
           {loading ? "جاري الإرسال..." : "إرسال"}
