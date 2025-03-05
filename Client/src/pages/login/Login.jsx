@@ -26,8 +26,8 @@ const Login = () => {
         "http://localhost:4000/api/login",
         formData
       );
-      const token = response.data.token; // Assuming the token is in response.data.token
-      localStorage.setItem("authToken", token); // Store token in localStorage
+      const token = response.data.token; 
+      localStorage.setItem("authToken", token); 
 
       setSuccess("تم تسجيل الدخول بنجاح!");
       setFormData({ email: "", password: "" });
