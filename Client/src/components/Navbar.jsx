@@ -214,7 +214,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
+    setIsLoggedIn(!token);
 
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
