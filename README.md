@@ -39,4 +39,4 @@ Mahmoud Suliman - Developer
 Mohammed Ajlouni - Developer
 
 
-[trello](https://www.figma.com/design/3OnygWHopIqCuPPt3Xb88z/Untitled?m=auto&t=ypkl4a4wg7yvOjRe-6)
+[trello]([https://www.figma.com/design/3OnygWHopIqCuPPt3Xb88z/Untitled?m=auto&t=ypkl4a4wg7yvOjRe-6](https://trello.com/b/Ue8U1OZZ/charitable-project))
