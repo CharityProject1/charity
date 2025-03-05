@@ -269,30 +269,37 @@
 
 // export default Footer;
 
-import { Facebook, Twitter, Instagram, Linkedin, Heart,  ArrowUp } from "lucide-react";
+import {
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin,
+  Heart,
+  ArrowUp,
+} from "lucide-react";
 
 const Footer = () => {
   const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      };
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
-    <footer className="bg-black text-gray-100 py-6 rtl shadow-t-md">
+    <footer className="bg-[#2D336B] text-[#A9B5DF] py-8 rtl shadow-t-md">
       <div className="container mx-auto px-4 text-center">
         {/* Logo */}
-        <div className="flex justify-center items-center mb-4">
-          <Heart className="w-6 h-6 text-rose-500 mr-2 animate-pulse" />
-          <div className="text-2xl font-bold text-transparent bg-gradient-to-r from-blue-600 to-rose-500 bg-clip-text">
+        <div className="flex justify-center items-center mb-6">
+          <Heart className="w-7 h-7 text-rose-500 mr-2 animate-pulse" />
+          <div className="text-3xl font-bold text-transparent bg-gradient-to-r from-[#A9B5DF] to-rose-500 bg-clip-text">
             جود
           </div>
         </div>
 
         {/* Footer Links */}
-        <div className="mb-6">
-          <ul className="flex justify-center space-x-8">
+        <div className="mb-8">
+          <ul className="flex justify-center space-x-10">
             <li>
               <a
                 href="#"
-                className="font-medium text-gray-100 hover:text-blue-600"
+                className="font-medium text-[#A9B5DF] hover:text-white transition-colors duration-300"
               >
                 الرئيسية
               </a>
@@ -300,7 +307,7 @@ const Footer = () => {
             <li>
               <a
                 href="#"
-                className="font-medium text-gray-100 hover:text-blue-600"
+                className="font-medium text-[#A9B5DF] hover:text-white transition-colors duration-300"
               >
                 عن التبرعات
               </a>
@@ -308,7 +315,7 @@ const Footer = () => {
             <li>
               <a
                 href="#"
-                className="font-medium text-gray-100 hover:text-blue-600"
+                className="font-medium text-[#A9B5DF] hover:text-white transition-colors duration-300"
               >
                 تواصل معنا
               </a>
@@ -317,33 +324,45 @@ const Footer = () => {
         </div>
 
         {/* Social Media Icons */}
-        <div className="flex justify-center space-x-6 mb-6">
-          <a href="#" className="text-gray-100 hover:text-blue-600">
+        <div className="flex justify-center space-x-8 mb-8">
+          <a
+            href="#"
+            className="text-[#A9B5DF] hover:text-white transition-colors duration-300"
+          >
             <Facebook className="w-6 h-6" />
           </a>
-          <a href="#" className="text-gray-100 hover:text-blue-600">
+          <a
+            href="#"
+            className="text-[#A9B5DF] hover:text-white transition-colors duration-300"
+          >
             <Twitter className="w-6 h-6" />
           </a>
-          <a href="#" className="text-gray-100 hover:text-blue-600">
+          <a
+            href="#"
+            className="text-[#A9B5DF] hover:text-white transition-colors duration-300"
+          >
             <Instagram className="w-6 h-6" />
           </a>
-          <a href="#" className="text-gray-100 hover:text-blue-600">
+          <a
+            href="#"
+            className="text-[#A9B5DF] hover:text-white transition-colors duration-300"
+          >
             <Linkedin className="w-6 h-6" />
           </a>
         </div>
 
         {/* Bottom Text */}
-        <p className="text-sm text-gray-100">
+        <p className="text-sm text-[#A9B5DF]">
           &copy; 2025 جميع الحقوق محفوظة لـ{" "}
-          <span className="font-semibold text-blue-100">جود</span>
+          <span className="font-semibold text-white">جود</span>
         </p>
       </div>
-        {/* زر العودة للأعلى */}
+      {/* زر العودة للأعلى */}
       <button
         onClick={scrollToTop}
-        className="fixed bottom-8 left-8 bg-gray-700 hover:bg-gray-600 h-12 w-12 rounded-full flex items-center justify-center shadow-lg transition duration-300 z-50"
+        className="fixed bottom-8 left-8 bg-[#A9B5DF] hover:bg-white h-12 w-12 rounded-full flex items-center justify-center shadow-lg transition duration-300 z-50"
       >
-        <ArrowUp className="h-5 w-5" />
+        <ArrowUp className="h-5 w-5 text-[#2D336B]" />
       </button>
     </footer>
   );
